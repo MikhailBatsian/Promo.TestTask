@@ -1,0 +1,6 @@
+@Promo.TestTask.Server_HostAddress = http://localhost:5212
+
+GET {{Promo.TestTask.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
