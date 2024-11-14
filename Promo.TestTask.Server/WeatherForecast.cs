@@ -1,4 +1,4 @@
-namespace Promo.TestTask.Server;
+namespace Promo.TestTask.Api;
 
 public class WeatherForecast
 {
