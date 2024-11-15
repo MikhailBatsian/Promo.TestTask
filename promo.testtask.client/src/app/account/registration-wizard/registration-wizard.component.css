@@ -1,0 +1,42 @@
+form{
+    padding-top: 1rem;
+}
+.stepper-container {
+    display: block;
+    justify-content: center;
+    width: 40%;
+    margin: 0 auto;
+  }
+  
+  .step-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+  
+  .form-field {
+    width: 100%;
+  }
+  
+  @media (max-width: 600px) {
+    .stepper-container {
+        width: 100%;
+      padding: 8px;
+    }
+  
+    .form-field {
+      max-width: 100%;
+    }
+  
+    mat-checkbox,
+    button {
+      max-width: 100%;
+    }
+  }
+
+  .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+  }

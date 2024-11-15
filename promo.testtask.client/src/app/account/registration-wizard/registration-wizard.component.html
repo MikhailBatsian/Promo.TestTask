@@ -1,0 +1,70 @@
+
+<div class="stepper-container">
+    <mat-horizontal-stepper [linear]="isLinear" orientation="vertical" #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup" class="step-form">
+            <ng-template matStepLabel>Step 1</ng-template>
+      
+            <mat-form-field appearance="fill">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" type="email" required>
+              <mat-error *ngIf="email?.hasError('required')">Email is required</mat-error>
+              <mat-error *ngIf="email?.hasError('email')">Please enter a valid email</mat-error>
+            </mat-form-field>
+      
+            <mat-form-field appearance="fill">
+              <mat-label>Password</mat-label>
+              <input matInput formControlName="password" type="password" required>
+              <mat-error *ngIf="password?.hasError('required')">Password is required</mat-error>
+              <mat-error *ngIf="password?.hasError('pattern')">Password must contain at least one digit and one letter</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Confirm Password</mat-label>
+              <input matInput formControlName="confirmPassword" type="password" required>
+              <mat-error *ngIf="confirmPassword?.hasError('required')">Please confirm your password</mat-error>
+              <mat-error *ngIf="confirmPassword?.hasError('passwordsMismatch')">Confirmed password must be the same with the field ”password”</mat-error>
+            </mat-form-field>
+
+            <mat-checkbox formControlName="agree">I agree to the terms</mat-checkbox>
+
+            <div style="margin-top: -1.5rem;" *ngIf="agree?.hasError('required') && isNextClicked" class="error-message">You must agree</div>
+            <div>
+              <button mat-raised-button color="primary" matStepperNext (click)="validateFirstForm()">
+                Go to step 2
+              </button>
+            </div>
+          </form>
+        </mat-step>
+      
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup" class="step-form">
+            <ng-template matStepLabel>Step 2</ng-template>
+      
+            <mat-form-field appearance="fill">
+              <mat-label>Country</mat-label>
+              <mat-select formControlName="country">
+                <mat-option *ngFor="let country of countries" [value]="country.id">
+                    {{ country.name }}
+                  </mat-option>
+              </mat-select>
+            </mat-form-field>
+      
+            <mat-form-field>
+              <mat-label>Province</mat-label>
+              <mat-select formControlName="province">
+                <mat-option *ngFor="let province of provinces" [value]="province.id">
+                  {{ province.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="secondFormGroup.get('city')?.hasError('required')">Province is required</mat-error>
+            </mat-form-field>
+
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-raised-button color="primary" (click)="save()" [disabled]="!secondFormGroup.valid">Save</button>
+            </div>
+          </form>
+        </mat-step>
+      </mat-horizontal-stepper>
+</div>  
