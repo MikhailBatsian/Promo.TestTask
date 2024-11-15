@@ -1,6 +1,7 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using Promo.TestTask.Api.Extensions;
 using Promo.TestTask.Api.Validators;
 using Promo.TestTask.Domain.Account.Repositories;
 using Promo.TestTask.Domain.Account.Services;
@@ -45,9 +46,17 @@ public class Program
         app.UseDefaultFiles();
         app.UseStaticFiles();
 
-        app.UseSwagger();
-        app.UseSwaggerUI();
-
+        if (builder.Environment.IsDevelopment())
+        {
+            app.UseCorsPolicy();
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
+        else
+        {
+            app.UseExceptionHandler();
+        }
+        
         app.UseHttpsRedirection();
 
         app.MapControllers();

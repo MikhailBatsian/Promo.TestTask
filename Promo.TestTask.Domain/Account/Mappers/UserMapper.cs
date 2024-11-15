@@ -12,7 +12,7 @@ internal static class UserMapper
         {
             Id = user.Id,
             Email = user.Email,
-            PasswordHash = user.PasswordHash,
+            PasswordHash = hasPassword ? user.PasswordHash : null,
             ProvinceId = user.ProvinceId,
             IsAgreed = user.IsAgreed
         };

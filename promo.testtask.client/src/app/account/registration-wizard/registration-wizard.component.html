@@ -8,14 +8,14 @@
             <mat-form-field appearance="fill">
               <mat-label>Email</mat-label>
               <input matInput formControlName="email" type="email" required>
-              <mat-error *ngIf="email?.hasError('required')">Email is required</mat-error>
+              <mat-error *ngIf="email?.hasError('required')">Email is a required field</mat-error>
               <mat-error *ngIf="email?.hasError('email')">Please enter a valid email</mat-error>
             </mat-form-field>
       
             <mat-form-field appearance="fill">
               <mat-label>Password</mat-label>
               <input matInput formControlName="password" type="password" required>
-              <mat-error *ngIf="password?.hasError('required')">Password is required</mat-error>
+              <mat-error *ngIf="password?.hasError('required')">Password is a required field</mat-error>
               <mat-error *ngIf="password?.hasError('pattern')">Password must contain at least one digit and one letter</mat-error>
             </mat-form-field>
 
@@ -48,6 +48,7 @@
                     {{ country.name }}
                   </mat-option>
               </mat-select>
+              <mat-error *ngIf="secondFormGroup.get('country')?.hasError('required')">Country is a required field</mat-error>
             </mat-form-field>
       
             <mat-form-field>
@@ -57,12 +58,12 @@
                   {{ province.name }}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="secondFormGroup.get('city')?.hasError('required')">Province is required</mat-error>
+              <mat-error *ngIf="secondFormGroup.get('province')?.hasError('required')">Province is a required field</mat-error>
             </mat-form-field>
 
             <div>
               <button mat-button matStepperPrevious>Back</button>
-              <button mat-raised-button color="primary" (click)="save()" [disabled]="!secondFormGroup.valid">Save</button>
+              <button mat-raised-button color="primary" (click)="save()">Save</button>
             </div>
           </form>
         </mat-step>

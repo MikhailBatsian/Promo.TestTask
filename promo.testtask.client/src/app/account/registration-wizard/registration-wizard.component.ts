@@ -79,13 +79,15 @@ export class RegistrationWizardComponent implements OnInit {
   }
 
   save() {
+    this.firstFormGroup.markAllAsTouched();
+    
     if (this.firstFormGroup.valid && this.secondFormGroup.valid) {
       if (this.firstFormGroup.valid) {
         const userData = {
           email: this.firstFormGroup.value.email,
           password: this.firstFormGroup.value.password,
           city: this.firstFormGroup.value.city,
-          agree: this.firstFormGroup.value.agree,
+          isAgreed: this.firstFormGroup.value.agree,
           provinceId: this.secondFormGroup.value.province
         };
   
