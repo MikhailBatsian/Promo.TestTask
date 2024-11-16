@@ -14,7 +14,7 @@ public class ProvinceRepository : EFRepository<Province>, IProvinceRepository
         var result = await GetQuery()
             .Where(x => x.CountryId == countryId)
             .ToListAsync();
-    ;
+
         return result;
     }
 }

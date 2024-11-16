@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Promo.TestTask.Api", "Promo.TestTask.Server\Promo.TestTask.Api.csproj", "{862968C7-B253-4E89-A0AD-5CAB47E1ADC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Promo.TestTask.Api", "Promo.TestTask.Api\Promo.TestTask.Api.csproj", "{862968C7-B253-4E89-A0AD-5CAB47E1ADC1}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "promo.testtask.client", "promo.testtask.client\promo.testtask.client.esproj", "{C0AF657A-6248-46C3-BAE9-8F830A2E3AC9}"
 EndProject

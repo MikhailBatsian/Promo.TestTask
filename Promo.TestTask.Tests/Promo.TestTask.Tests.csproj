@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Promo.TestTask.Server\Promo.TestTask.Api.csproj" />
+    <ProjectReference Include="..\Promo.TestTask.Api\Promo.TestTask.Api.csproj" />
   </ItemGroup>
 
 </Project>
