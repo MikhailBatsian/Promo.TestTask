@@ -17,6 +17,8 @@ export class RegistrationWizardComponent implements OnInit {
   secondFormGroup!: FormGroup;
   
   @ViewChild(MatStepper) stepper!: MatStepper;
+  @ViewChild('firstStepForm') firstStepForm: any;
+  @ViewChild('secondStepForm') secondStepForm: any;
 
   countries: any[] = [];
   provinces: any[] = [];
@@ -57,6 +59,7 @@ export class RegistrationWizardComponent implements OnInit {
 
     this.secondFormGroup.get('country')?.valueChanges.subscribe({
       next: (countryId) => {
+        if(countryId)
         this._locationService.getProvinces(countryId).subscribe({
           next: (provinces) =>{
             this.provinces = provinces;
@@ -73,7 +76,7 @@ export class RegistrationWizardComponent implements OnInit {
   get country() { return this.secondFormGroup.get('country'); }
   get province() { return this.secondFormGroup.get('province'); }
 
-  validateFirstForm() {
+  executeSecondStep() {
     this.isNextClicked = true;
     this.firstFormGroup.markAllAsTouched();
   }
@@ -98,10 +101,11 @@ export class RegistrationWizardComponent implements OnInit {
               verticalPosition: 'top',
               horizontalPosition: 'center'
             });
-           
-            this.stepper.selectedIndex = 0;
-            this.resetForm(this.firstFormGroup);
-            this.resetForm(this.secondFormGroup);
+
+            this.firstStepForm.resetForm();
+            this.secondStepForm.resetForm();
+            this.stepper.reset();
+            this.isNextClicked = false;
           },
           error: (e) => {
             const errorsMessages = Object.entries(e.error)
@@ -117,15 +121,5 @@ export class RegistrationWizardComponent implements OnInit {
         });
       }
     }
-  }
-
-  resetForm(formGroup: FormGroup) {
-    let control: AbstractControl;
-    formGroup.reset();
-    formGroup.markAsUntouched();
-    Object.keys(formGroup.controls).forEach((name) => {
-      control = formGroup.controls[name];
-      control.setErrors(null);
-    });
   }
 }

@@ -2,7 +2,7 @@
 <div class="stepper-container">
     <mat-horizontal-stepper [linear]="isLinear" orientation="vertical" #stepper>
         <mat-step [stepControl]="firstFormGroup">
-          <form [formGroup]="firstFormGroup" class="step-form">
+          <form #firstStepForm="ngForm" [formGroup]="firstFormGroup" class="step-form">
             <ng-template matStepLabel>Step 1</ng-template>
       
             <mat-form-field appearance="fill">
@@ -30,7 +30,7 @@
 
             <div style="margin-top: -1.5rem;" *ngIf="agree?.hasError('required') && isNextClicked" class="error-message">You must agree</div>
             <div>
-              <button mat-raised-button color="primary" matStepperNext (click)="validateFirstForm()">
+              <button mat-raised-button color="primary" matStepperNext (click)="executeSecondStep()">
                 Go to step 2
               </button>
             </div>
@@ -38,7 +38,7 @@
         </mat-step>
       
         <mat-step [stepControl]="secondFormGroup">
-          <form [formGroup]="secondFormGroup" class="step-form">
+          <form #secondStepForm="ngForm" [formGroup]="secondFormGroup" class="step-form">
             <ng-template matStepLabel>Step 2</ng-template>
       
             <mat-form-field appearance="fill">
