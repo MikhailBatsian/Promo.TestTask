@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Promo.TestTask.Api.Identity;
 using Promo.TestTask.Api.Requests;
+using Promo.TestTask.Api.Validators;
 using Promo.TestTask.Domain.Account.DTO;
 using Promo.TestTask.Domain.Account.Services;
 
@@ -9,26 +10,23 @@ namespace Promo.TestTask.Api.Controllers;
 [Route("api/account")]
 public class AccountController : ControllerBase
 {
-
     private readonly IUserService _userService;
+    private readonly CreateUserValidator _createUserValidator;
 
-    public AccountController(IUserService userService)
+    public AccountController(
+        IUserService userService, 
+        CreateUserValidator createUserValidator)
     {
         _userService = userService;
+        _createUserValidator = createUserValidator;
     }
 
     [HttpPost("create-user")]
     public async Task<ActionResult> CreateUser([FromBody] CreateUserRequest createUserRequest)
     {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-
-        var existingUser = await _userService.Get(createUserRequest.Email);
-        if (existingUser != null)
-        {
-            ModelState.AddModelError(nameof(createUserRequest.Email), "User with same email already exist");
-            return BadRequest(ModelState);
-        }
+        var validationResult = await _createUserValidator.ValidateAsync(createUserRequest);
+        if (!validationResult.IsValid)
+            return BadRequest(validationResult.Errors.Select(x => x.ErrorMessage).ToList());
 
         var user = await _userService.Create(new UserDto
         {

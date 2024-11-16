@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Promo.TestTask.Persistence"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Promo.TestTask.Core", "Promo.TestTask.Core\Promo.TestTask.Core.csproj", "{59913F19-537C-4226-B1AF-4D74FD4185C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Promo.TestTask.Domain", "Promo.TestTask.Domain\Promo.TestTask.Domain.csproj", "{F1B6046A-DB64-4F23-A722-981254DB4C2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Promo.TestTask.Domain", "Promo.TestTask.Domain\Promo.TestTask.Domain.csproj", "{F1B6046A-DB64-4F23-A722-981254DB4C2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Promo.TestTask.Tests", "Promo.TestTask.Tests\Promo.TestTask.Tests.csproj", "{D9793593-23CE-4634-B8CA-5FD77C59C61D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{F1B6046A-DB64-4F23-A722-981254DB4C2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1B6046A-DB64-4F23-A722-981254DB4C2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1B6046A-DB64-4F23-A722-981254DB4C2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9793593-23CE-4634-B8CA-5FD77C59C61D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9793593-23CE-4634-B8CA-5FD77C59C61D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9793593-23CE-4634-B8CA-5FD77C59C61D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9793593-23CE-4634-B8CA-5FD77C59C61D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{611B5D27-CD76-43C7-BF5C-0F866CE839F4} = {EE591289-F035-4666-927B-198221DC09F6}
 		{59913F19-537C-4226-B1AF-4D74FD4185C1} = {EE591289-F035-4666-927B-198221DC09F6}
 		{F1B6046A-DB64-4F23-A722-981254DB4C2F} = {EE591289-F035-4666-927B-198221DC09F6}
+		{D9793593-23CE-4634-B8CA-5FD77C59C61D} = {EE591289-F035-4666-927B-198221DC09F6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {180C02E8-8631-47AF-99E1-4EF13D196A9B}

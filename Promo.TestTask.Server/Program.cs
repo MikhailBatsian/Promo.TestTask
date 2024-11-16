@@ -1,5 +1,4 @@
 using FluentValidation;
-using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Promo.TestTask.Api.Extensions;
 using Promo.TestTask.Api.Validators;
@@ -17,12 +16,12 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddTransient<IUserRepository, UserRepository>();
-        builder.Services.AddTransient<ICountryRepository, CountryRepository>();
-        builder.Services.AddTransient<IProvinceRepository, ProvinceRepository>();
+        builder.Services.AddScoped<IUserRepository, UserRepository>();
+        builder.Services.AddScoped<ICountryRepository, CountryRepository>();
+        builder.Services.AddScoped<IProvinceRepository, ProvinceRepository>();
 
-        builder.Services.AddTransient<IUserService, UserService>();
-        builder.Services.AddTransient<ILocationService, LocationService>();
+        builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddScoped<ILocationService, LocationService>();
 
         builder.Services.AddDbContext<PromoDbContext>(options =>
         {
@@ -32,8 +31,6 @@ public class Program
 
         builder.Services.AddControllers();
 
-        builder.Services.AddFluentValidationAutoValidation();
-        builder.Services.AddFluentValidationClientsideAdapters();
         builder.Services.AddValidatorsFromAssemblyContaining<CreateUserValidator>();
 
         builder.Services.AddEndpointsApiExplorer();
