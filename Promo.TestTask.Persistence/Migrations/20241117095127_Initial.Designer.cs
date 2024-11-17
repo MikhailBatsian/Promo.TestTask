@@ -10,8 +10,8 @@ using Promo.TestTask.Persistence;
 namespace Promo.TestTask.Persistence.Migrations
 {
     [DbContext(typeof(PromoDbContext))]
-    [Migration("20241113175843_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241117095127_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,20 +44,6 @@ namespace Promo.TestTask.Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("Countries");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Code = "US",
-                            Name = "United States"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Code = "CA",
-                            Name = "Canada"
-                        });
                 });
 
             modelBuilder.Entity("Promo.TestTask.Domain.Account.Entities.Province", b =>
@@ -79,32 +65,6 @@ namespace Promo.TestTask.Persistence.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("Provinces");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CountryId = 1,
-                            Name = "California"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CountryId = 1,
-                            Name = "New York"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CountryId = 2,
-                            Name = "Ontario"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CountryId = 2,
-                            Name = "Quebec"
-                        });
                 });
 
             modelBuilder.Entity("Promo.TestTask.Domain.Account.Entities.User", b =>
@@ -124,15 +84,10 @@ namespace Promo.TestTask.Persistence.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ProvinceId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
                         .IsUnique();
-
-                    b.HasIndex("ProvinceId");
 
                     b.ToTable("Users");
                 });
@@ -150,13 +105,28 @@ namespace Promo.TestTask.Persistence.Migrations
 
             modelBuilder.Entity("Promo.TestTask.Domain.Account.Entities.User", b =>
                 {
-                    b.HasOne("Promo.TestTask.Domain.Account.Entities.Province", "Province")
-                        .WithMany()
-                        .HasForeignKey("ProvinceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.OwnsOne("Promo.TestTask.Domain.Account.ValueObjects.Address", "Address", b1 =>
+                        {
+                            b1.Property<int>("UserId")
+                                .HasColumnType("INTEGER");
 
-                    b.Navigation("Province");
+                            b1.Property<string>("Country")
+                                .HasColumnType("TEXT")
+                                .HasColumnName("Country");
+
+                            b1.Property<string>("Province")
+                                .HasColumnType("TEXT")
+                                .HasColumnName("Province");
+
+                            b1.HasKey("UserId");
+
+                            b1.ToTable("Users");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("Promo.TestTask.Domain.Account.Entities.Country", b =>

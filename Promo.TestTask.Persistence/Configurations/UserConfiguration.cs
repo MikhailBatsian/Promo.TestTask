@@ -8,11 +8,14 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        builder.Property(b => b.Email)
+        builder.Property(x => x.Email)
             .IsRequired()
             .HasMaxLength(256);
-
-        builder.HasIndex(x => x.Email).IsUnique();
-        builder.HasOne(b => b.Province);
+        builder.OwnsOne(u => u.Address, a =>
+        {
+            a.Property(ad => ad.Country).HasColumnName("Country");
+            a.Property(ad => ad.Province).HasColumnName("Province");
+        });
+        builder.HasIndex(u => u.Email).IsUnique();
     }
 }

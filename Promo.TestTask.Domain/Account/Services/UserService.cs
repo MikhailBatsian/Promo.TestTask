@@ -2,6 +2,7 @@
 using Promo.TestTask.Domain.Account.Entities;
 using Promo.TestTask.Domain.Account.Mappers;
 using Promo.TestTask.Domain.Account.Repositories;
+using Promo.TestTask.Domain.Account.ValueObjects;
 
 namespace Promo.TestTask.Domain.Account.Services;
 
@@ -27,7 +28,11 @@ public class UserService : IUserService
             Email = userDto.Email,
             PasswordHash = userDto.PasswordHash,
             IsAgreed = userDto.IsAgreed,
-            ProvinceId = userDto.ProvinceId
+            Address = new Address
+            {
+                Province = userDto.Province,
+                Country = userDto.Country
+            }
         };
 
         await _userRepository.AddAsync(user);

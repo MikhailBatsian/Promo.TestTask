@@ -32,7 +32,8 @@ public class AccountController : ControllerBase
         {
             Email = createUserRequest.Email,
             PasswordHash = IdentityUtilities.ComputeHash(createUserRequest.Password),
-            ProvinceId = createUserRequest.ProvinceId,
+            Country = createUserRequest.Country,
+            Province = createUserRequest.Province,
             IsAgreed = createUserRequest.IsAgreed
         });
 

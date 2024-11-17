@@ -13,7 +13,8 @@ internal static class UserMapper
             Id = user.Id,
             Email = user.Email,
             PasswordHash = hasPassword ? user.PasswordHash : null,
-            ProvinceId = user.ProvinceId,
+            Country = user.Address.Country,
+            Province = user.Address.Province,
             IsAgreed = user.IsAgreed
         };
     }

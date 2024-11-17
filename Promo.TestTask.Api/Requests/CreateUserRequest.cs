@@ -5,5 +5,6 @@ public class CreateUserRequest
     public string Email { get; set; }
     public string Password { get; set; }
     public bool IsAgreed { get; set; }
-    public int ProvinceId { get; set; }
+    public string Country { get; set; }
+    public string Province { get; set; }
 }

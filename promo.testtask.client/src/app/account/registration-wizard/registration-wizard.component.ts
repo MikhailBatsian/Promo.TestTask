@@ -58,9 +58,9 @@ export class RegistrationWizardComponent implements OnInit {
     });
 
     this.secondFormGroup.get('country')?.valueChanges.subscribe({
-      next: (countryId) => {
-        if(countryId)
-        this._locationService.getProvinces(countryId).subscribe({
+      next: (country) => {
+        if(country.id)
+        this._locationService.getProvinces(country.id).subscribe({
           next: (provinces) =>{
             this.provinces = provinces;
           }
@@ -91,7 +91,8 @@ export class RegistrationWizardComponent implements OnInit {
           password: this.firstFormGroup.value.password,
           city: this.firstFormGroup.value.city,
           isAgreed: this.firstFormGroup.value.agree,
-          provinceId: this.secondFormGroup.value.province
+          province: this.secondFormGroup.value.province,
+          country: this.secondFormGroup.value.country.name
         };
   
         this._accountService.createUser(userData).subscribe({

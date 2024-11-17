@@ -2,12 +2,10 @@
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace Promo.TestTask.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -24,6 +22,23 @@ namespace Promo.TestTask.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Countries", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
+                    IsAgreed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Country = table.Column<string>(type: "TEXT", nullable: true),
+                    Province = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -44,48 +59,6 @@ namespace Promo.TestTask.Persistence.Migrations
                         principalTable: "Countries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
-                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
-                    IsAgreed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    ProvinceId = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_Provinces_ProvinceId",
-                        column: x => x.ProvinceId,
-                        principalTable: "Provinces",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.InsertData(
-                table: "Countries",
-                columns: new[] { "Id", "Code", "Name" },
-                values: new object[,]
-                {
-                    { 1, "US", "United States" },
-                    { 2, "CA", "Canada" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Provinces",
-                columns: new[] { "Id", "CountryId", "Name" },
-                values: new object[,]
-                {
-                    { 1, 1, "California" },
-                    { 2, 1, "New York" },
-                    { 3, 2, "Ontario" },
-                    { 4, 2, "Quebec" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -110,21 +83,16 @@ namespace Promo.TestTask.Persistence.Migrations
                 table: "Users",
                 column: "Email",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_ProvinceId",
-                table: "Users",
-                column: "ProvinceId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Provinces");
 
             migrationBuilder.DropTable(
-                name: "Provinces");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Countries");
